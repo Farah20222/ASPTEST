@@ -103,8 +103,6 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim(ClaimTypes.Role, "admin");
     });
 
-
-
     options.AddPolicy("IsCustomer", policy =>
     {
         policy.RequireClaim(ClaimTypes.Role, "customer");
