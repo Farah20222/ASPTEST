@@ -24,4 +24,20 @@ namespace WebApplication100.DTO
         public UserProfile? User { get; set; }
     }
 
+    public class AddNewProduct
+    {
+        public string? ProductName { get; set; }
+        public string? Description { get; set; }
+        public bool? Availability { get; set; }
+        public decimal Price { get; set; }
+    }
+
+    public class UpdateProduct
+    {
+        public string? ProductName { get; set; }
+        public string? Description { get; set; }
+        public bool? Availability { get; set; }
+        public decimal Price { get; set; }
+    }
+
 }

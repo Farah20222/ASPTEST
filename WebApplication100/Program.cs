@@ -46,6 +46,7 @@ builder.Services.AddDbContext<AssignmentDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Assignment"));
 });
 builder.Services.AddScoped<ITimeZoneService, TimeZoneService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<ITokenHandler, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
