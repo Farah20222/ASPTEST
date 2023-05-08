@@ -40,31 +40,31 @@ namespace WebApplication100.Controllers
         }
 
 
-        [HttpPost("[action]")]
-        [Authorize(Policy = "IsAdminOrVendor")]
-        public async Task<IActionResult> AddProduct([FromForm] AddNewProduct newProduct)
-        {
-            var userId = UserClaims.GetUserClaimID(HttpContext);
-            var product = new Product()
-            {
-                ProductName= newProduct.ProductName,
-                VendorId= userId, 
-                CreatedTime= timeZoneService.ChangeTimeZoneToRegional(DateTime.UtcNow), 
-                Description= newProduct.Description,
-                Availability= true, 
-                Price= newProduct.Price
-            };
+        //[HttpPost("[action]")]
+        //[Authorize(Policy = "IsAdminOrVendor")]
+        //public async Task<IActionResult> AddProduct([FromForm] AddNewProduct newProduct)
+        //{
+        //    var userId = UserClaims.GetUserClaimID(HttpContext);
+        //    var product = new Product()
+        //    {
+        //        ProductName= newProduct.ProductName,
+        //        VendorId= userId, 
+        //        CreatedTime= timeZoneService.ChangeTimeZoneToRegional(DateTime.UtcNow), 
+        //        Description= newProduct.Description,
+        //        Availability= true, 
+        //        Price= newProduct.Price
+        //    };
 
-            var vendorProduct = new ProductVendor()
-            {
-                UserProfileId = userId
-            };
+        //    var vendorProduct = new ProductVendor()
+        //    {
+        //        UserProfileId = userId
+        //    };
 
 
-            product = await productRepository.AddAsync(product, vendorProduct);
-            var productDTO = mapper.Map<ProductDTO>(product); 
-            return CreatedAtAction(nameof(GetProductInformation), new {id= productDTO.ProductId}, productDTO); 
-        }
+        //    product = await productRepository.AddAsync(product, vendorProduct);
+        //    var productDTO = mapper.Map<ProductDTO>(product); 
+        //    return CreatedAtAction(nameof(GetProductInformation), new {id= productDTO.ProductId}, productDTO); 
+        //}
 
         [HttpPut("UpdateProduct/{productId:int}")]
         [Authorize(Policy = "IsAdminOrVendor")]
