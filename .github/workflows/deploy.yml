@@ -21,7 +21,6 @@ jobs:
         environment-name: ASPAssignment-env
         version-label: ${{ github.sha }}
         deployment-package: ./WebApplication100.zip
-        name: Build and Package
 on:
   push:
     branches:
