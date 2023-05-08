@@ -1,36 +1,40 @@
-name: Deploy to AWS Elastic Beanstalk
+name: Deploy to Elastic Beanstalk
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+      
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.x'
-
-    - name: Build and publish application
-      run: dotnet publish -c Release -o publish
-
-    - name: Install AWS CLI
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y python3-pip
-        pip3 install --upgrade --user awscli
-
+        dotnet-version: '5.0.x'
+        
+    - name: Build project
+      run: dotnet build --configuration Release
+      
+    - name: Publish project
+      run: dotnet publish -c Release -o ./publish
+      
+    - name: Zip files
+      run: zip -r publish.zip publish
+      
     - name: Deploy to Elastic Beanstalk
-      run: |
-        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws configure set aws_region${{ secrets.AWS_REGION }}
-        aws elasticbeanstalk create-application-version --application-name ASPAssignment --version-label $GITHUB_SHA --source-bundle S3Bucket=asp-netwebapibucket,S3Key=ASPTEST
-        aws elasticbeanstalk update-environment --environment-name ASPAssignment-env --version-label $GITHUB_SHA
+      uses: einaregilsson/beanstalk-deploy@v19
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        application_name: "ASPAssignment"
+        environment_name: "ASPAssignment-env"
+        version_label: ${{ github.sha }}
+        region: "us-east-1"
+        deployment_package: "publish.zip"
+        command: "dotnet publish/WebApplication100.dll"
