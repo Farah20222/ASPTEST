@@ -14,25 +14,21 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install zip
+    - name: Build and package
+      run: |
+        dotnet publish --configuration Release --output ./publish
+        cd publish
+        zip -r ../myapp.zip *
+        cd ..
     - name: Deploy to Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v15
       with:
         aws-region: us-east-1
         application-name: ASPAssignment
         environment-name: ASPAssignment-env
         version-label: ${{ github.sha }}
-        deployment-package: ./WebApplication100.zip
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '5.0.x'
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build and package
-      run: dotnet publish --configuration Release --output WebApplication100
-    - name: Zip package
-      run: zip -r WebApplication100.zip WebApplication100
+        deployment-package: ./ASPAssignment.zip
