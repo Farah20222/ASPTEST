@@ -22,7 +22,7 @@ jobs:
       run: |
         dotnet publish --configuration Release --output ./publish
         cd publish
-        zip -r ../myapp.zip *
+        zip -r ../ASPAssignment.zip *
         cd ..
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v15
