@@ -9,6 +9,7 @@ using WebApplication100.Service;
 
 namespace WebApplication100.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
