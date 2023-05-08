@@ -124,10 +124,15 @@ builder.Services.AddAuthorization(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Production"))
 {
+    app.UseDeveloperExceptionPage(); 
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c=> c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API"));
+}
+else
+{
+    app.UseExceptionHandler("/Error"); 
 }
 
 app.UseHttpsRedirection();
