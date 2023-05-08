@@ -24,47 +24,47 @@ namespace WebApplication100.Controllers
             this.timeZoneService = timeZoneService;
         }
 
-        //[HttpGet("GetProductById/{productId:int}")]
-        //[ActionName("GetProductInformation")]
-        //public async Task<ActionResult<Product>> GetProductInformation(int productId)
-        //{
-        //    var product = await productRepository.GetAsync(productId);
-        //    if (product is null)
-        //    {
-        //        return NotFound($"Product not found with the given Id: {productId}.");
-        //    }
+        [HttpGet("GetProductById/{productId:int}")]
+        [ActionName("GetProductInformation")]
+        public async Task<ActionResult<Product>> GetProductInformation(int productId)
+        {
+            var product = await productRepository.GetAsync(productId);
+            if (product is null)
+            {
+                return NotFound($"Product not found with the given Id: {productId}.");
+            }
 
-        //    var productDTO = mapper.Map<ProductDTO>(product);
+            var productDTO = mapper.Map<ProductDTO>(product);
 
-        //    return Ok(productDTO);
-        //}
-
-
-        //[HttpPost("[action]")]
-        //[Authorize(Policy = "IsAdminOrVendor")]
-        //public async Task<IActionResult> AddProduct([FromForm] AddNewProduct newProduct)
-        //{
-        //    var userId = UserClaims.GetUserClaimID(HttpContext);
-        //    var product = new Product()
-        //    {
-        //        ProductName = newProduct.ProductName,
-        //        VendorId = userId,
-        //        CreatedTime = timeZoneService.ChangeTimeZoneToRegional(DateTime.UtcNow),
-        //        Description = newProduct.Description,
-        //        Availability = true,
-        //        Price = newProduct.Price
-        //    };
-
-        //    var vendorProduct = new ProductVendor()
-        //    {
-        //        UserProfileId = userId
-        //    };
+            return Ok(productDTO);
+        }
 
 
-        //    product = await productRepository.AddAsync(product, vendorProduct);
-        //    var productDTO = mapper.Map<ProductDTO>(product);
-        //    return CreatedAtAction(nameof(GetProductInformation), new { id = productDTO.ProductId }, productDTO);
-        //}
+        [HttpPost("[action]")]
+        [Authorize(Policy = "IsAdminOrVendor")]
+        public async Task<IActionResult> AddProduct([FromForm] AddNewProduct newProduct)
+        {
+            var userId = UserClaims.GetUserClaimID(HttpContext);
+            var product = new Product()
+            {
+                ProductName = newProduct.ProductName,
+                VendorId = userId,
+                CreatedTime = timeZoneService.ChangeTimeZoneToRegional(DateTime.UtcNow),
+                Description = newProduct.Description,
+                Availability = true,
+                Price = newProduct.Price
+            };
+
+            var vendorProduct = new ProductVendor()
+            {
+                UserProfileId = userId
+            };
+
+
+            product = await productRepository.AddAsync(product, vendorProduct);
+            var productDTO = mapper.Map<ProductDTO>(product);
+            return CreatedAtAction(nameof(GetProductInformation), new { id = productDTO.ProductId }, productDTO);
+        }
 
         [HttpPut("UpdateProduct/{productId:int}")]
         [Authorize(Policy = "IsAdminOrVendor")]
