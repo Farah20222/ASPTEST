@@ -1,35 +1,33 @@
 name: Deploy to Elastic Beanstalk
 
+
 on:
   push:
     branches:
       - master
 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: us-east-1
-      ASPNETCORE_ENVIRONMENT: "Production"
-      ASPNETCORE_URLS: "http://+:80"
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
 
+
       - name: Build and publish
         run: dotnet publish -c Release -o ./publish
-
+       
       - name: Zip content
-        run: cd publish && zip -r ${{ github.sha }}.zip . && mv ${{ github.sha }}.zip ../${{ github.sha }}.zip
+        run: cd publish && zip -r ${{ github.sha }}.zip . && mv ${{ github.sha }}.zip  ../${{ github.sha }}.zip 
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -38,16 +36,29 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Upload to S3
-        run: aws s3 cp ${{ github.sha }}.zip s3://deploymentasp
+      - name: Upload to S3 
+        run:  aws s3 cp ${{ github.sha }}.zip s3://deploymentasp 
 
       - name: Install AWS CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y awscli
 
-      - name: Create Application Version
-        run: aws elasticbeanstalk create-application-version --application-name ASPAssignment --version-label ${{ github.sha }} --source-bundle S3Bucket="deploymentasp",S3Key="${{ github.sha }}.zip"
 
-      - name: Update Application Version
-        run: aws elasticbeanstalk update-environment --application-name ASPAssignment --environment-name ASPAssignment-env --version-label ${{ github.sha }}
+      - name: Create Application Version
+        run: aws elasticbeanstalk create-application-version --application-name ASPAssignment --version-label $GITHUB_SHA --source-bundle S3Bucket="deploymentasp",S3Key="${{ github.sha }}.zip "
+
+      - name: Update Application Version 
+        run: aws elasticbeanstalk update-environment  --application-name ASPAssignment --environment-name ASPAssignment-env --version-label $GITHUB_SHA 
+       
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+          ASPNETCORE_ENVIRONMENT: "Production"
+          ASPNETCORE_URLS: "http://+:80"
+          
+        
+        
+
+
