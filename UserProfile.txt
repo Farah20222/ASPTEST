@@ -1,0 +1,15 @@
+CREATE TABLE [dbo].[UserProfiles] (
+    [UserProfileId]   INT           IDENTITY (1, 1) NOT NULL,
+    [FirstName]       NVARCHAR (50) NULL,
+    [LastName]        NVARCHAR (50) NULL,
+    [email]           VARCHAR (50)  NOT NULL,
+    [password]        VARCHAR (MAX) NULL,
+    [PasswordSalt]    VARCHAR (MAX) NULL,
+    [ForgetPassword]  VARCHAR (MAX) NULL,
+    [ForgetCreatedAt] DATETIME      NULL,
+    [CreatedTime]     DATETIME      NULL,
+    [RoleName]        NVARCHAR (50) NULL,
+    [Phone]           INT           NULL,
+    CONSTRAINT [PK_UserProfiles] PRIMARY KEY CLUSTERED ([UserProfileId] ASC)
+);
+

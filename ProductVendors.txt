@@ -1,0 +1,9 @@
+CREATE TABLE [dbo].[ProductVendors] (
+    [ProductVendorId] INT IDENTITY (1, 1) NOT NULL,
+    [UserProfileId]   INT NULL,
+    [ProductId]       INT NULL,
+    CONSTRAINT [PK_ProductVendors] PRIMARY KEY CLUSTERED ([ProductVendorId] ASC),
+    CONSTRAINT [FK_ProductVendors_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [dbo].[UserProfiles] ([UserProfileId]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Productss_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Products] ([ProductId])
+);
+

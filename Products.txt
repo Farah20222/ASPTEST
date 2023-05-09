@@ -1,0 +1,13 @@
+CREATE TABLE [dbo].[Products] (
+    [ProductId]    INT             IDENTITY (1, 1) NOT NULL,
+    [ProductName]  VARCHAR (MAX)   NULL,
+    [CreatedBy]    INT             NULL,
+    [CreatedTime]  DATETIME        NULL,
+    [UpdatedTime]  DATETIME        NULL,
+    [Description]  NVARCHAR (MAX)  NULL,
+    [Availability] BIT             NULL,
+    [Price]        DECIMAL (18, 3) NULL,
+    CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED ([ProductId] ASC),
+    CONSTRAINT [FK_Products_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[UserProfiles] ([UserProfileId]) ON DELETE SET NULL
+);
+
