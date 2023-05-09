@@ -79,6 +79,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
 
+
         // event to check token expiry
         options.Events = new JwtBearerEvents
         {
