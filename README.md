@@ -24,7 +24,7 @@ These instructions will guide you through the process of setting up the ASP.NET 
 ##### Installing
 
 1. Clone the repository to your local machine using Git.
-2. Open the solution file `MyApp.sln` in Visual Studio.
+2. Open the solution file `WebApplication100.sln` in Visual Studio.
 3. Build the solution to restore NuGet packages and ensure that everything is working as expected.
 
 ##### Configuration
