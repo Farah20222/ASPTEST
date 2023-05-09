@@ -36,7 +36,7 @@ These instructions will guide you through the process of setting up the ASP.NET 
     "Assignment": "server=<server-name>;database=<databaseName>;Integrated Security=False; TrustServerCertificate=True; User ID=admin;Password=<password>"
   }
 ```
-and the following JWT 
+and the following JWT key, issuer and audience to create JWT Tokens for login and registration 
 
 ```
   "Jwt": {
