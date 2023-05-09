@@ -134,7 +134,7 @@ namespace WebApplication100.Controllers
 
 
         [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> SendForgotPasswordEmail([FromBody] ForgetPasswordDTO forgetPassword)
+        public async Task<IActionResult> ForgetPasswordRequest([FromBody] ForgetPasswordDTO forgetPassword)
         {
             var user = await userRepository.GetByEmailAsync(forgetPassword.Email);
             if (user == null)

@@ -27,7 +27,22 @@ namespace WebApplication100.Controllers
             this.timeZoneService = timeZoneService;
         }
 
+       
+
+
+       
+
+
+        [HttpGet("GetAllProducts")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
+        {
+            var products = await productsRepository.GetAll(); 
+            var productsDTO = mapper.Map<List<ProductDTO>>(products);
+            return Ok(productsDTO); 
+        }
+
         [HttpGet("GetProductInformation/{productId:int}")]
+        [ActionName("GetProduct")]
         public async Task<ActionResult<Product>> GetProduct(int productId)
         {
             var product = await productsRepository.GetAsync(productId);
@@ -41,29 +56,6 @@ namespace WebApplication100.Controllers
         }
 
 
-
-        [HttpGet("GetVendorProducts")]
-        public async Task<ActionResult<IEnumerable<ProductVendor>>> GetVendorProduct()
-        {
-            var userId = UserClaims.GetUserClaimID(HttpContext);
-            var products = await productsRepository.GetByVendor(userId);
-            if (products == null)
-            {
-                return NotFound("No products found with the given id: " + userId);
-            }
-            var productsDTO = mapper.Map<List<ProductVendorDTO>>(products);
-            return Ok(productsDTO);
-        }
-
-
-        [HttpGet("GetAllProducts")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
-        {
-            var products = await productsRepository.GetAll(); 
-            var productsDTO = mapper.Map<List<ProductDTO>>(products);
-            return Ok(productsDTO); 
-        }
-
         [HttpPost("[action]")]
         [Authorize(Policy = "IsAdminOrVendor")]
         public async Task<IActionResult> AddProduct(AddProduct addProduct)
@@ -72,6 +64,7 @@ namespace WebApplication100.Controllers
             var newProduct = new Product()
             {
                 ProductName = addProduct.ProductName,
+                // Created By user is the product's vendor
                 CreatedBy = userId,
                 Description = addProduct.Description,
                 CreatedTime = timeZoneService.ChangeTimeZoneToRegional(DateTime.UtcNow),
@@ -86,9 +79,22 @@ namespace WebApplication100.Controllers
 
             newProduct = await productsRepository.AddAsync(newProduct, vendorProduct); 
             var productDTO = mapper.Map<ProductDTO>(newProduct);
-            return CreatedAtAction(nameof(GetProduct), new { id = productDTO.ProductId }, productDTO);
+            return CreatedAtAction(nameof(GetProduct), new { productId = productDTO.ProductId }, productDTO);
 
 
+        }
+
+        [HttpGet("GetVendorProducts")]
+        public async Task<ActionResult<IEnumerable<ProductVendor>>> GetVendorProduct()
+        {
+            var userId = UserClaims.GetUserClaimID(HttpContext);
+            var products = await productsRepository.GetByVendor(userId);
+            if (products == null)
+            {
+                return NotFound("No products found with the given id: " + userId);
+            }
+            var productsDTO = mapper.Map<List<ProductVendorDTO>>(products);
+            return Ok(productsDTO);
         }
 
         [HttpPut("UpdateProducts/{productId:int}")]
