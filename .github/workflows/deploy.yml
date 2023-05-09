@@ -24,13 +24,8 @@ jobs:
 
 
       - name: Build and publish
-        run: dotnet publish -c Release -o ./publish
+        run: dotnet publish -c Release -o ./publish && zip hello.zip ./publish && aws s3 cp hello.zip s3://deploymentasp
        
-
-      - name: Zip content
-        run: zip hello.zip ./publish && aws s3 cp hello.zip s3://deploymentasp
-
-
 
       - name: Install AWS CLI
         run: |
