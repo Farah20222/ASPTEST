@@ -27,7 +27,7 @@ jobs:
           sudo pip3 install awsebcli
 
       - name: Initialize Elastic Beanstalk environment
-        run: eb init ASPAssignment-env --region us-east-1 --platform "64bit Amazon Linux 2 v5.4.6 running .NET 6.0"
+        run: eb init ASPAssignment-env --region us-east-1 --platform "64bit Amazon Linux 2 v2.5.3 running .NET 6.0"
 
       - name: Deploy to AWS Elastic Beanstalk
         run: eb deploy
