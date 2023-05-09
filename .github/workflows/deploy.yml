@@ -50,5 +50,6 @@ jobs:
           AWS_REGION: us-east-1
           ASPNETCORE_ENVIRONMENT: "Production"
           ASPNETCORE_URLS: "http://+:80"
+          AWS_EC2_METADATA_DISABLED: true
 
 
