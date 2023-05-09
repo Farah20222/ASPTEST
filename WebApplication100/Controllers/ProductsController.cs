@@ -66,8 +66,7 @@ namespace WebApplication100.Controllers
 
         [HttpPost("[action]")]
         [Authorize(Policy = "IsAdminOrVendor")]
-
-        public async Task<IActionResult> AddClass(AddProduct addProduct)
+        public async Task<IActionResult> AddProduct(AddProduct addProduct)
         {
             var userId = UserClaims.GetUserClaimID(HttpContext);
             var newProduct = new Product()
