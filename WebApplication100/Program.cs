@@ -51,7 +51,7 @@ builder.Services.AddDbContext<AssignmentDBContext>(options =>
 
 
 builder.Services.AddScoped<ITimeZoneService, TimeZoneService>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 
 builder.Services.AddScoped<ITokenHandler, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

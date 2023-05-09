@@ -9,9 +9,10 @@ namespace WebApplication100.Profiles
     {
         public ProductProfile()
         {
-            CreateMap<Product, ProductDTO>().ReverseMap();
             CreateMap<UserProfile, UserProfileDTO>().ReverseMap();
+            CreateMap<Product, ProductDTO>().ReverseMap();
             CreateMap<ProductVendor, ProductVendorDTO>().ReverseMap();
+
 
 
         }
