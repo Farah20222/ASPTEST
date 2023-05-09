@@ -27,7 +27,7 @@ jobs:
         run: dotnet publish -c Release -o ./publish
        
       - name: Zip content
-        run: zip hello.zip ./publish
+        run: zip -r hello.zip ./publish
 
       - name: Upload to S3
         run: aws s3 cp hello.zip s3://deploymentasp
@@ -50,7 +50,7 @@ jobs:
           AWS_REGION: us-east-1
           ASPNETCORE_ENVIRONMENT: "Production"
           ASPNETCORE_URLS: "http://+:80"
-          deployment_package: "hello.zip"
+        
         
 
 
