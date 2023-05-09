@@ -36,12 +36,12 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         run: |
           aws elasticbeanstalk create-application-version \
-            --application-name ASPAssignment \
+            --application-name AssignmentASP \
             --version-label $GITHUB_SHA \
 
 
           aws elasticbeanstalk update-environment \
-            --environment-name ASPAssignment-env \
+            --environment-name AssignmentASP-env \
             --version-label $GITHUB_SHA
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
