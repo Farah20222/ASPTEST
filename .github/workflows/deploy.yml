@@ -20,8 +20,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEYw_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESSw_KEY }}
-        application_name: ASPAssignment
-        environment_name: ASPAssignment-env
+        application_name: AssignmentASP
+        environment_name: AssignmentASP-env
         version_label: 12345
         region: us-east-1
         deployment_package: deploy.zip
