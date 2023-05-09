@@ -36,6 +36,15 @@ These instructions will guide you through the process of setting up the ASP.NET 
     "Assignment": "server=<server-name>;database=<databaseName>;Integrated Security=False; TrustServerCertificate=True; User ID=admin;Password=<password>"
   }
 ```
+and the following JWT 
+
+```
+  "Jwt": {
+    "Key": <JWT-Key>,
+    "Issuer": "https://localhost:7169/",
+    "Audience": "https://localhost:7169/"
+  },
+```
 ##### Running the Application 
 1. When running the application, it will navigate you to the following page : "https://localhost:7169/swagger". The project uses Swagger UI to showcase the APIs and the documentation 
 
