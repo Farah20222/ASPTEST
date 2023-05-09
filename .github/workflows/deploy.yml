@@ -27,7 +27,7 @@ jobs:
         run: dotnet publish -c Release -o ./publish
        
       - name: where am i 
-        run: ls -la
+        run: cd publish && ls -la
 
       - name: Zip content
         run: zip hello.zip ./publish
