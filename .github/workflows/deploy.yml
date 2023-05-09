@@ -27,7 +27,7 @@ jobs:
         run: dotnet publish -c Release -o ./publish
        
       - name: Zip content
-        run: zip -r hello.zip ./publish
+        run: zip -r hello1.zip ./publish
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -37,7 +37,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Upload to S3 
-        run:  aws s3 cp hello.zip s3://deploymentasp 
+        run:  aws s3 cp publish.zip s3://deploymentasp 
 
       - name: Install AWS CLI
         run: |
@@ -46,7 +46,7 @@ jobs:
 
 
       - name: Create Application Version
-        run: aws elasticbeanstalk create-application-version --application-name ASPAssignment --version-label $GITHUB_SHA --source-bundle S3Bucket="deploymentasp",S3Key="hello.zip"
+        run: aws elasticbeanstalk create-application-version --application-name ASPAssignment --version-label $GITHUB_SHA --source-bundle S3Bucket="deploymentasp",S3Key="hello1.zip"
 
       - name: Update Application Version 
         run: aws elasticbeanstalk update-environment  --application-name ASPAssignment --environment-name ASPAssignment-env --version-label $GITHUB_SHA 
