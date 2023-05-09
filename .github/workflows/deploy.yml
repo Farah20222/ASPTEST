@@ -28,10 +28,9 @@ jobs:
        
 
       - name: Zip content
-        run: zip hello.zip ./publish
+        run: zip hello.zip ./publish && aws s3 cp hello.zip s3://deploymentasp
 
-      - name: Upload to S3
-        run: aws s3 cp hello.zip s3://deploymentasp
+
 
       - name: Install AWS CLI
         run: |
