@@ -7,7 +7,7 @@ namespace WebApplication100.DTO
     {
         public int ProductId { get; set; }
         public string? ProductName { get; set; }
-        public int? VendorId { get; set; }
+        public int? Vendor { get; set; }
         public DateTime? CreatedTime { get; set; }
         public DateTime? UpdatedTime { get; set; }
         public string? Description { get; set; }
@@ -15,8 +15,8 @@ namespace WebApplication100.DTO
         public decimal Price { get; set; }
 
 
-        public virtual UserProfileDTO? VendorProfile { get; set; }
-        public virtual ICollection<ProductVendorDTO> ProductVendors { get; set; }
+        public  UserProfileDTO? VendorUser { get; set; }
+        public  ICollection<ProductVendorDTO> ProductVendors { get; set; }
     }
 
     public class ProductVendorDTO
@@ -28,7 +28,6 @@ namespace WebApplication100.DTO
     {
         public string? ProductName { get; set; }
         public string? Description { get; set; }
-        public bool? Availability { get; set; }
         public decimal Price { get; set; }
     }
 

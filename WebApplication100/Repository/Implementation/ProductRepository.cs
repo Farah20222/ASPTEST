@@ -44,7 +44,7 @@ namespace WebApplication100.Repository.Implementation
         public async Task<Product>GetAsync(int id)
         {
             return await assignmentDBContext.Products
-                 .Include(x => x.VendorProfile)
+                 .Include(x => x.VendorUser)
                  .FirstOrDefaultAsync(x => x.ProductId == id); 
         }
 

@@ -5,7 +5,7 @@
 
         public int ProductId { get; set; }
         public string? ProductName { get; set; }
-        public int? VendorId { get; set; }
+        public int? Vendor { get; set; }
         public DateTime? CreatedTime { get; set; }
         public DateTime? UpdatedTime { get; set; }
         public string? Description { get; set; }
@@ -13,7 +13,7 @@
         public decimal Price { get; set; }
 
 
-        public virtual UserProfile? VendorProfile { get; set; }
+        public virtual UserProfile? VendorUser { get; set; }
         public virtual ICollection<ProductVendor> ProductVendors { get; set; }
 
     }

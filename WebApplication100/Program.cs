@@ -14,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+/// adds controllers
+builder.Services.AddControllers().AddNewtonsoftJson();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -45,12 +48,16 @@ builder.Services.AddDbContext<AssignmentDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Assignment"));
 });
+
+
 builder.Services.AddScoped<ITimeZoneService, TimeZoneService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<ITokenHandler, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+// automapper for DTOs and Models
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddSwaggerGen();
 
@@ -95,6 +102,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     }
 );
 
+/// configures memory storage
+builder.Services.AddDistributedMemoryCache();
+
 
 builder.Services.AddAuthorization(options =>
 {
@@ -137,8 +147,9 @@ else
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
