@@ -25,7 +25,13 @@ jobs:
 
       - name: Build and publish
         run: dotnet publish -c Release -o ./publish
+       
 
+      - name: Zip content
+        run: zip hello.zip ./publish
+
+      - name: Upload to S3
+        run: aws s3 cp hello.zip s3://deploymentasp
 
       - name: Install AWS CLI
         run: |
@@ -33,17 +39,17 @@ jobs:
           sudo apt-get install -y awscli
 
 
-      - name: Deploy to Elastic Beanstalk
-        run: |
-        
+      - name: Create Application Version
+        run: aws elasticbeanstalk create-application-version --application-name ASPAssignment --version-label $GITHUB_SHA --source-bundle S3Bucket="deploymentasp",S3Key="hello.zip"
 
-
-          aws elasticbeanstalk update-environment \
-            --environment-name ASPAssignment-env \
-            --version-label 4d6893805fcf8f774d24d897d0bc80e7cb269f3b
+      - name: Update Application Version 
+        run: aws elasticbeanstalk update-environment  --application-name ASPAssignment --environment-name ASPAssignment-env --version-label $GITHUB_SHA 
+       
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
           ASPNETCORE_ENVIRONMENT: "Production"
           ASPNETCORE_URLS: "http://+:80"
+
+
