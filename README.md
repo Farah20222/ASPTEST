@@ -50,8 +50,8 @@ and the following JWT
 
 ##### Deploying to AWS Cloud :  Elastic Beanstalk
 1. You can create an Elastic Beanstalk environemnt for ASP.NET Core Web API in AWS 
-2. In order to create a Github Actions workflow, we require a .yml file to set the commands.  In this project the .yml file is called "deploy.yml" and is located in the .github/workflows/ folder
-3. Push the code to github inorder to start a new GitHub Actions workflow 
+2. In order to create a Github Actions workflow, we require a .yml file to set the commands.  In this project the .yml file is called "deploy.yml" and is located in  `.github/workflows/` 
+3. Push the code to github to start a new GitHub Actions workflow 
 4. Wait for the workflow to complete and verify the application is deployed  and running in Elastic Beanstalk 
 5. The Elastic Beanstalk link for this project : http://aspassignment-env.eba-fm46p7dp.us-east-1.elasticbeanstalk.com/swagger/index.html
 
