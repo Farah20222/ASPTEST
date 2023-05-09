@@ -30,7 +30,7 @@ jobs:
         run: zip -r hello.zip ./publish
 
       - name: Upload to S3
-        run: ls -la && aws s3 cp hello.zip s3://deploymentasp
+        run:  aws s3 cp hello.zip s3://deploymentasp --region us-east-1
 
       - name: Install AWS CLI
         run: |
