@@ -87,7 +87,8 @@ namespace WebApplication100.Controllers
 
             newProduct = await productsRepository.AddAsync(newProduct, vendorProduct); 
             var productDTO = mapper.Map<ProductDTO>(newProduct);
-            return Ok(productDTO); 
+            return CreatedAtAction(nameof(GetProduct), new { id = productDTO.ProductId }, productDTO);
+
 
         }
 
@@ -119,10 +120,36 @@ namespace WebApplication100.Controllers
         }
 
 
+        [HttpDelete]
+        [Route("{productId:int}")]
+        [Authorize(Policy = "IsAdminOrVendor")]
+        public async Task<IActionResult>DeleteProduct(int productId)
+        {
+            var product = await productsRepository.GetAsync(productId); 
+            if(product== null)
+            {
+                return NotFound("Product Not found."); 
+            }
 
+            var userId = UserClaims.GetUserClaimID(HttpContext);
+            var loggedInUserRole = User.FindFirstValue(ClaimTypes.Role);
+            var vendorProduct = await productsRepository.IsVendorProduct(userId, productId);
+            if (loggedInUserRole == "vendor" && vendorProduct == false)
+            {
+                return Unauthorized("User unauthorized");
 
+            }
 
-        //[HttpDelete("[]")]
+            var deleteProduct = await productsRepository.DeleteAsync(productId); 
+            if(deleteProduct == null)
+            {
+                return NotFound($"No product found with the given Id:{productId}"); 
+            }
+
+            var productDTO = mapper.Map<ProductDTO>(deleteProduct);
+            return Ok(productDTO); 
+
+        }
 
 
     }

@@ -10,6 +10,7 @@ namespace WebApplication100.Repository.Interface
         Task<IEnumerable<ProductVendor>> GetByVendor(int userId);
         Task<bool> IsVendorProduct(int userId, int productId);
         Task<Product> UpdateAsync(int productId, UpdateProduct updateProduct);
-        Task<IEnumerable<Product>> GetAll(); 
+        Task<IEnumerable<Product>> GetAll();
+        Task<Product> DeleteAsync(int productId); 
     }
 }

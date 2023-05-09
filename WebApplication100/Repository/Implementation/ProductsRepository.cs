@@ -100,5 +100,18 @@ namespace WebApplication100.Repository.Implementation
         }
 
 
+        public async Task<Product> DeleteAsync(int productId)
+        {
+            var delete = await assignmentDBContext.Products.FirstOrDefaultAsync(x => x.ProductId == productId); 
+            if( delete == null)
+            {
+                return null; 
+            }
+
+            assignmentDBContext.Products.Remove(delete);
+            await assignmentDBContext.SaveChangesAsync();
+            return delete; 
+        }
+
     }
 }
