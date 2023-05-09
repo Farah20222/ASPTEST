@@ -27,7 +27,7 @@ jobs:
         run: dotnet publish -c Release -o ./publish
        
       - name: Zip content
-        run: cd publish && zip -r $PATH.zip . && mv $PATH.zip ../$PATH.zip
+        run: cd publish && zip -r ${{ github.sha }}.zip . && mv ${{ github.sha }}.zip  ../${{ github.sha }}.zip 
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -37,7 +37,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Upload to S3 
-        run:  aws s3 cp $PATH.zip s3://deploymentasp 
+        run:  aws s3 cp ${{ github.sha }}.zip s3://deploymentasp 
 
       - name: Install AWS CLI
         run: |
@@ -46,7 +46,7 @@ jobs:
 
 
       - name: Create Application Version
-        run: aws elasticbeanstalk create-application-version --application-name ASPAssignment --version-label $GITHUB_SHA --source-bundle S3Bucket="deploymentasp",S3Key="$PATH.zip"
+        run: aws elasticbeanstalk create-application-version --application-name ASPAssignment --version-label $GITHUB_SHA --source-bundle S3Bucket="deploymentasp",S3Key="${{ github.sha }}.zip "
 
       - name: Update Application Version 
         run: aws elasticbeanstalk update-environment  --application-name ASPAssignment --environment-name ASPAssignment-env --version-label $GITHUB_SHA 
@@ -57,7 +57,7 @@ jobs:
           AWS_REGION: us-east-1
           ASPNETCORE_ENVIRONMENT: "Production"
           ASPNETCORE_URLS: "http://+:80"
-          PATH: ${{ env.DOTNET_ROOT }}:$PATH
+          
         
         
 
