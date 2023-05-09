@@ -4,15 +4,8 @@
 
 Create a secure ASP.NET Core Web API application that allows users to perform CRUD (Create, Read, Update, Delete) operations on records in a database. Use Entity Framework for database access and ensure the application handles errors gracefully. Deploy the application using a CI/CD pipeline to AWS Cloud.
 
-### Requirements
+### Guide to the repository 
 
-- Create an ASP.NET Core Web API project to handle CRUD operations for a simple entity (e.g., "Product" with properties like ID, Name, Description, and Price).
-- Use Entity Framework Core for database access and create an MS SQL Server database to store the data.
-- Implement user authentication and authorization to secure the application, using ASP.NET Core Identity or a token-based approach (e.g., JWT).
-- Handle errors gracefully and provide meaningful error messages to the users.
-- Set up a CI/CD pipeline using any popular CI/CD tool ()
-- Deploy the application to AWS Cloud (e.g., using AWS Elastic Beanstalk, AWS App Runner, or Amazon ECS with Fargate).
-- Commit the source code to a GitHub repository.
 ### CI/CD & Deployment environment
 The following project uses AWS Elastic beanstalk for the AWS Cloud and Github actions for deployment
 ### Instructions
