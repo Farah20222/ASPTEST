@@ -1,42 +1,27 @@
-name: Deploy to AWS Elastic Beanstalk
-
+name: Deploy master
 on:
   push:
     branches:
-      - master
+    - master
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
+
+    - name: Checkout source code
       uses: actions/checkout@v2
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v21
       with:
-        dotnet-version: 6.0.x
-
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-
-    - name: Publish
-      run: dotnet publish --configuration Release --no-build --output ./publish
-
-    - name: Zip published files
-      run: zip -r publish.zip ./publish
-
-    - name: Deploy AWS Elastic Beanstalk
-      uses: einaregilsson/beanstalk-deploy@v14
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEYw_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESSw_KEY }}
         application_name: ASPAssignment
         environment_name: ASPAssignment-env
+        version_label: 12345
         region: us-east-1
-        version_label: ${{ github.run_number }}
-        deployment_package: publish.zip
+        deployment_package: deploy.zip
