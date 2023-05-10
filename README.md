@@ -33,7 +33,7 @@ These instructions will guide you through the process of setting up the ASP.NET 
 2. Update the `appsettings.json` file in the  project with the database connection string 
 ```
   "ConnectionStrings": {
-    "Assignment": "server=<server-name>;database=<databaseName>;Integrated Security=False; TrustServerCertificate=True; User ID=admin;Password=<password>"
+    "Assignment": "server=<Derver>;database=<database-Name>;Integrated Security=False; TrustServerCertificate=True; User ID=admin;Password=<password>"
   }
 ```
 and the following JWT key, issuer and audience to create JWT Tokens for login and registration 
