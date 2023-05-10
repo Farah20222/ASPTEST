@@ -57,7 +57,7 @@ and the following JWT key, issuer and audience to create JWT Tokens for login an
 
 
 ### Explanation of each API 
-###### /AUTHCONTROLLER
+###### /AuthController
 API 1: Login
 HTTP method: POST
 Endpoint: /api/Auth/Login
