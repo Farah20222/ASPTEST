@@ -57,7 +57,7 @@ and the following JWT key, issuer and audience to create JWT Tokens for login an
 
 
 ##### Explanation of each API 
-###### AUTHCONTROLLER
+###### /AUTHCONTROLLER
 API 1: Login
 HTTP method: POST
 Endpoint: /api/Auth/Login
@@ -100,7 +100,7 @@ Description: This endpoint is used after requesting for token from the /api/Auth
 Requires the requested token and a new password from the user.
 
 
-###### ProductsController
+###### /ProductsController
 API 1: GetProductInformation
 HTTP method: GET
 Endpoint: `/api/Products/GetProductInformation/{productId}`
@@ -136,7 +136,7 @@ Description: This endpoint is used to delete a product.
 Admins are authorized to delete any product. 
 Vendors are authorized on delete only their own products. 
 
-###### PurchaseController
+###### /PurchaseController
 API 1: PurchaseProduct
 HTTP method: Post
 Endpoint: `/api/PurchaseProduct`
