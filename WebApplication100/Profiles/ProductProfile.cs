@@ -12,6 +12,8 @@ namespace WebApplication100.Profiles
             CreateMap<UserProfile, UserProfileDTO>().ReverseMap();
             CreateMap<Product, ProductDTO>().ReverseMap();
             CreateMap<ProductVendor, ProductVendorDTO>().ReverseMap();
+            CreateMap<Purchase, PurchaseDTO>().ReverseMap();
+
 
 
 

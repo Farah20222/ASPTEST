@@ -158,6 +158,8 @@ namespace WebApplication100.Repository.Implementation
             passwordSaltString = Convert.ToBase64String(passwordSalt);
             passwordHashString = Convert.ToBase64String(passwordHash);
         }
+
+
         private bool VerifyPassword(string password, string passwordHash, string passwordSalt)
         {
             // convert to bytes for comparison

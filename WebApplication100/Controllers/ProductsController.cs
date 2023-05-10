@@ -202,8 +202,7 @@ namespace WebApplication100.Controllers
         /// <returns>
         /// The deleted product object
         /// </returns>
-        [HttpDelete]
-        [Route("{productId:int}")]
+        [HttpDelete("DeleteProduct/{productId:int}")]
         [Authorize(Policy = "IsAdminOrVendor")]
         public async Task<IActionResult>DeleteProduct(int productId)
         {

@@ -1,0 +1,12 @@
+CREATE TABLE [dbo].[Purchases] (
+    [PurchaseId]    INT           IDENTITY (1, 1) NOT NULL,
+    [UserProfileId] INT           NULL,
+    [ProductId]     INT           NULL,
+    [PurchasedAt]   DATETIME2 (7) NULL,
+	[PurchaseCost]        DECIMAL (18, 3) NULL,
+
+    CONSTRAINT [PK_Purchases] PRIMARY KEY CLUSTERED ([PurchaseId] ASC),
+    CONSTRAINT [FK_Purchase_UserId] FOREIGN KEY ([UserProfileId]) REFERENCES [dbo].[UserProfiles] ([UserProfileId]) ON DELETE SET NULL,
+    CONSTRAINT [FK_Purchases_Products] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Products] ([ProductId])
+);
+

@@ -55,6 +55,8 @@ builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 
 builder.Services.AddScoped<ITokenHandler, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPurchaseProductsRepository, PurchaseProductsRepository>();
+
 
 // automapper for DTOs and Models
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
