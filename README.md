@@ -1,4 +1,4 @@
-## ASP.NET CRUD Application with REST API and CI/CD Deployment to AWS Cloud
+## ASP.NET CRUD Application with REST API 
 
 ### Description
 
@@ -33,7 +33,7 @@ These instructions will guide you through the process of setting up the ASP.NET 
 2. Update the `appsettings.json` file in the  project with the database connection string 
 ```
   "ConnectionStrings": {
-    "Assignment": "server=<server-name>;database=<databaseName>;Integrated Security=False; TrustServerCertificate=True; User ID=admin;Password=<password>"
+    "Assignment": "server=<Derver>;database=<database-Name>;Integrated Security=False; TrustServerCertificate=True; User ID=admin;Password=<password>"
   }
 ```
 and the following JWT key, issuer and audience to create JWT Tokens for login and registration 
@@ -56,8 +56,8 @@ and the following JWT key, issuer and audience to create JWT Tokens for login an
 5. The Elastic Beanstalk link for this project : http://aspassignment-env.eba-fm46p7dp.us-east-1.elasticbeanstalk.com/swagger/index.html
 
 
-##### Explanation of each API 
-###### /AUTHCONTROLLER
+### Explanation of each API 
+###### /AuthController
 API 1: Login
 HTTP method: POST
 Endpoint: /api/Auth/Login
