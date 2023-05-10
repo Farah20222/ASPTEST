@@ -186,8 +186,7 @@ Description: This endpint retrieves all the customer purchases with the product 
 - AWS ELASTIC BEANSTALK 
 - GITHUB ACTIONS 
 
-##### Author: 
-Farah Shaheen
+
 
 
 
