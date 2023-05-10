@@ -55,6 +55,100 @@ and the following JWT key, issuer and audience to create JWT Tokens for login an
 4. Wait for the workflow to complete and verify the application is deployed  and running in Elastic Beanstalk 
 5. The Elastic Beanstalk link for this project : http://aspassignment-env.eba-fm46p7dp.us-east-1.elasticbeanstalk.com/swagger/index.html
 
+
+##### Explanation of each API 
+###### AUTHCONTROLLER
+API 1: Login
+HTTP method: POST
+Endpoint: /api/Auth/Login
+Description: This endpoint is used for users to login. 
+After running the endpoint, copy the token, and paste it in the Swagger UI "Authorize" section
+
+API 2: UserRegistration
+HTTP method: POST
+Endpoint: `/api/Auth/UserRegistration`
+Description: This endpoint is used for users to create a new account, the roles of the users will be on default "customer"
+Requires the users name, email , phone number and password.
+
+API 3: VendorRegistration
+HTTP method: POST
+Endpoint: `/api/Auth/VendorRegistration`
+Description: This endpoint is used for users to register as a vendor
+Requires the vendor's name, email, phone number and password
+
+API 4: User
+HTTP method: Get
+Endpoint: `/api/Auth/User/{id}`
+Description: This endpoint is authorized only for the admin with the role "admin" to search by user ID.
+The end point checks for the logged in user role from the Claims
+
+API 5: ChangePassword
+HTTP method: PUT
+Endpoint: `/api/Auth/ChangePassword`
+Description: This endpoint is used to change a user's password. 
+It verifies that the current password provided in the is the same as the password from the database by using password and password salt.
+
+API 6: ForgotPassword
+HTTP method: POST
+Endpoint: `/api/Auth/ForgotPassword`
+Description: This endpoint is used to request for a token if the user has forgotten their password
+
+API 7: ResetPassword
+HTTP method: PUT
+Endpoint: `/api/Auth/ResetPassword`
+Description: This endpoint is used after requesting for token from the /api/Auth/ForgotPassword endpoint. 
+Requires the requested token and a new password from the user.
+
+
+###### ProductsController
+API 1: GetProductInformation
+HTTP method: GET
+Endpoint: `/api/Products/GetProductInformation/{productId}`
+Description: This method is used to get product information by the product ID.
+
+API 2: GetAllProducts
+HTTP method: GET
+Endpoint: `/api/Products/GetAllProducts`
+Description: This endpoint is used to get all the available products in the database
+
+API 3: AddProduct
+HTTP method: POST
+Endpoint: `/api/AddProduct`
+Description: This endpoint is used to add a new product to the database by users with the roles of vendor and admin only.
+
+API 4: GetVendorProducts
+HTTP method: GET
+Endpoint: `/api/GetVendorProducts`
+Description: This endpoint is used to get all the vendors products. 
+The users details is obtained using the User claims allowing for logged in vendors to retrieve all their products owned by them only.
+
+API 5: UpdateProducts
+HTTP method: PUT
+Endpoint: `/api/UpdateProducts/{productId}`
+Description: This endpoint is used to update a product. 
+Admins are authorized to update any product. 
+Vendors are authorized on update only their own products. 
+
+API 5: DeleteProduct
+HTTP method: Delete
+Endpoint: `/api/DeleteProduct/{productId}`
+Description: This endpoint is used to delete a product. 
+Admins are authorized to delete any product. 
+Vendors are authorized on delete only their own products. 
+
+###### PurchaseController
+API 1: PurchaseProduct
+HTTP method: Post
+Endpoint: `/api/PurchaseProduct`
+Description: This endpoint is used to purchase an available product from the database. 
+
+
+API 2: GetCustomerPurchases
+HTTP method: Post
+Endpoint: `/api/PurchaseProduct/GetCustomerPurchases`
+Description: This endpint retrieves all the customer purchases with the product details.
+
+
 ##### Built with the following: 
 - ASP.NET CORE WEB API 
 - ENTITY FRAMEWORK CORE 
@@ -64,6 +158,7 @@ and the following JWT key, issuer and audience to create JWT Tokens for login an
 
 ##### Author: 
 Farah Shaheen
+
 
 
   
