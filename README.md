@@ -1,4 +1,4 @@
-## ASP.NET CRUD Application with REST API and CI/CD Deployment to AWS Cloud
+## ASP.NET CRUD Application with REST API 
 
 ### Description
 
