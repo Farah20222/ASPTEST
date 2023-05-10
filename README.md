@@ -30,7 +30,7 @@ Vendors can do the following:
 
 Customers can do the following: 
 1. Purchase a product 
-2. Retrieve theyr previously purchased products
+2. Retrieve their previously purchased products
 
  
 
