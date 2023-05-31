@@ -1,8 +1,38 @@
-## ASP.NET CRUD Application with REST API 
+## ASP.NET CRUD REST API 
 
 ### Description
 
-Create a secure ASP.NET Core Web API application that allows users to perform CRUD (Create, Read, Update, Delete) operations on records in a database. Use Entity Framework for database access and ensure the application handles errors gracefully. Deploy the application using a CI/CD pipeline to AWS Cloud.
+ ASP.NET Core Web API application that allows users to perform CRUD (Create, Read, Update, Delete)
+ The project has four models:
+ 1. Products : Used for storing product details (productId, product name, createdBy, time, description, price and availability)
+ 2. ProductVendors : Used for storing the relation between the vendors and their products for reference
+ 3. Purchase: Used for storing purchases made by customers (purchase Id, User Profile Id, product Id, and purchase cost)
+ 4. User Profile: Used to store the users details (User Id, password, name, email and phone)
+ 
+The project is used for vendors to add, update and delete products and for customers to purchase these products and retrieve them whenever needed. 
+The application uses JWT for password security and generates tokens that will expire every 30 days. 
+
+The application has three types of roles: Admin, Vendor and customer
+Users can do the following: 
+1. Login
+2. Register as either a vendor or customer
+3. Change their password
+4. Request for a new password using the Forgot Password Request
+5. Reset Their password
+6. View all available product details 
+7. View a specific product details 
+
+Vendors can do the following: 
+1. Add a new product 
+2. Retrieve the products they own 
+3. Delete products they own 
+4. Update products they own 
+
+Customers can do the following: 
+1. Purchase a product 
+2. Retrieve their previously purchased products
+
+ 
 
 ### Guide to the repository 
 
@@ -156,8 +186,7 @@ Description: This endpint retrieves all the customer purchases with the product 
 - AWS ELASTIC BEANSTALK 
 - GITHUB ACTIONS 
 
-##### Author: 
-Farah Shaheen
+
 
 
 
