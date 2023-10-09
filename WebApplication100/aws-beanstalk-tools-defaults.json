@@ -8,7 +8,7 @@
     "environment"    : "ASPTest",
     "enable-xray"    : false,
     "enhanced-health-type" : "basic",
-    "additional-options"   : "\"aws:autoscaling:launchconfiguration,SecurityGroups\"=\"sg-08de80526ac4360cb\";\"aws:ec2:vpc,Subnets\"=\"subnet-0bf640e6c4c4f5d21\"",
+    "additional-options"   : "",
     "proxy-server"         : "nginx",
     "app-path"             : "/",
     "iis-website"          : "Default Web Site",
