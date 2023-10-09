@@ -20,7 +20,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '7.0.x'
 
 
       - name: Build and publish
@@ -54,7 +54,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
+          AWS_REGION: me-south-1
           ASPNETCORE_ENVIRONMENT: "Production"
           ASPNETCORE_URLS: "http://+:80"
           
